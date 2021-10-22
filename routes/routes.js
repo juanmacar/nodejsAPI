@@ -36,7 +36,6 @@ router.get('/productos', function(req, res) {
       let nuevoProducto = {nombre: req.body.nombre, precio: req.body.precio, id: uuidv4()};
       productos.push(nuevoProducto)
     res.send(productos)
-    console.log(productos)
   })
 
   router.put('/productos/:id', function(req, res) {
