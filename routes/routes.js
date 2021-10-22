@@ -1,5 +1,6 @@
 const express = require('express'),
-    router = express.Router();
+router = express.Router();
+const {v4 : uuidv4} = require('uuid')
     
     let productos = [
         {
@@ -32,11 +33,10 @@ router.get('/productos', function(req, res) {
   })
 
   router.post('/productos', function(req, res) {
-      let nuevoProducto = req.body;
-      nuevoProducto = {...nuevoProducto, id: (productos.length +1)}
-      console.log(productos.length)
+      let nuevoProducto = {nombre: req.body.nombre, precio: req.body.precio, id: uuidv4()};
       productos.push(nuevoProducto)
     res.send(productos)
+    console.log(productos)
   })
 
   router.put('/productos/:id', function(req, res) {
