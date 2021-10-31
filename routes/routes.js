@@ -1,29 +1,30 @@
 const express = require('express'),
 router = express.Router();
-const {v4 : uuidv4} = require('uuid')
+const assignId = require('../modules/assignId.js');
+//const {v4 : uuidv4} = require('uuid')
     
     let productos = [
         {
-            nombre: "Macbook Air",
-            precio: 899,
-            foto: "",
+            title: "Macbook Air",
+            price: 899,
+            thumbnail: "macbook_air.png",
             id: 1
         },
         {
-            nombre: "Macbook Pro",
-            precio: 1999,
-            foto: "",
+            title: "Macbook Pro",
+            price: 1999,
+            thumbnail: "macbook_pro.png",
             id: 2
         },
         {
-            nombre: "Mac Mini",
-            precio: 699,
-            foto: "",
+            title: "Mac Mini",
+            price: 699,
+            thumbnail: "mac_mini.png",
             id: 3
         }
     ]
 
-router.get('/productos', function(req, res) {
+  router.get('/productos', function(req, res) {
     res.send(productos);
   })
 
@@ -33,15 +34,15 @@ router.get('/productos', function(req, res) {
   })
 
   router.post('/productos', function(req, res) {
-      let nuevoProducto = {nombre: req.body.nombre, precio: req.body.precio, id: uuidv4()};
+      let nuevoProducto = {title: req.body.title, price: req.body.price, thumbnail: req.body.thumbnail, id: assignId(productos)};
       productos.push(nuevoProducto)
     res.send(productos)
   })
 
   router.put('/productos/:id', function(req, res) {
     let id = req.params.id;
-    productos[id-1].nombre = req.body.nombre;
-    productos[id-1].precio = req.body.precio;
+    productos[id-1].title = req.body.title;
+    productos[id-1].price = req.body.price;
     res.send(productos)
   })
 
